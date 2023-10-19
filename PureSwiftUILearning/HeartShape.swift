@@ -35,6 +35,8 @@ struct FooShape: Shape {
     path.curve(g.topLeading, cp1: g.bottomLeading, cp2: g.topTrailing, showControlPoints: debug)
     path.curve(g.bottomTrailing, cp1: g.bottomLeading, cp2: g.topTrailing)
 
+    path.closeSubpath()
+
     return path
   }
 }

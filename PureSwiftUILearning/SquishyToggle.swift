@@ -7,12 +7,29 @@
 
 // Part 1: https://www.youtube.com/watch?v=WWEJVJoYk10
 // Part 2: https://www.youtube.com/watch?v=scODkRbmSzE
-
+// Part 3: https://www.youtube.com/watch?v=hEKwhUDWX9o
 
 import PureSwiftUI
 
 
 private let frameLayoutConfig = LayoutGuideConfig.grid(columns: [0.25, 0.4, 0.6, 0.75], rows: 2)
+
+private let buttonDiameterRatio = 0.9
+private let duration = 1.0
+
+private let stateIconConfig: LayoutGuideConfig = {
+  let controlPointOffsetRatio: CGFloat = 0.552
+  let controlPointOffsetInUnitSquare = controlPointOffsetRatio * 0.5
+  let columnsAndRows = [
+    0,
+    0.5 - controlPointOffsetInUnitSquare,
+    0.5,
+    0.5 + controlPointOffsetInUnitSquare,
+    1
+  ]
+  return LayoutGuideConfig.grid(columns: columnsAndRows, rows: columnsAndRows)
+}()
+
 
 struct SquishyToggle: View {
   @State private var isOn = true
@@ -27,12 +44,19 @@ struct SquishyToggle: View {
         ToggleFrame(isOn, debug: debug)
           .styling(color: .green)
           .layoutGuide(frameLayoutConfig, color: .green, lineWidth: 2)
-          .animation(.linear(duration: 1), value: isOn)
+          .animation(.linear(duration: duration), value: isOn)
         
-        ToggleButton()
-          .frame(size.heightScaled(0.9))
-          .xOffset(isOn ? size.halfHeight : -size.halfHeight)
-          .animation(.easeInOut(duration: 1), value: isOn)
+        Group {
+          ToggleButton()
+            .frame(size.heightScaled(buttonDiameterRatio))
+          
+          ToggleStateIcon(isOn, debug: debug)
+            .styling(lineWidth: size.widthScaled(0.04))
+            .frame(size.halfHeight)
+            .layoutGuide(stateIconConfig, color: .red, lineWidth: 1, opacity: 1)
+        }
+        .xOffsetIfNot(debug, isOn ? size.halfHeight : -size.halfHeight)
+        .animation(.easeInOut(duration: duration), value: isOn)
       }
       
       .frame(size)
@@ -46,7 +70,7 @@ struct SquishyToggle: View {
     .showLayoutGuides(debug)
   }
   
-  func calculateSize(from geo: GeometryProxy) -> CGSize {
+  private func calculateSize(from geo: GeometryProxy) -> CGSize {
     let doubleHeight = geo.heightScaled(2)
     return if geo.width < doubleHeight {
       .init(geo.width, geo.halfHeight)
@@ -119,7 +143,7 @@ private struct ToggleFrame: Shape {
   @ViewBuilder
   func styling(color: Color) -> some View {
     if debug {
-      strokeColor(.black, lineWidth: 2)
+      debugStyling()
     } else {
       fill(color)
     }
@@ -128,9 +152,10 @@ private struct ToggleFrame: Shape {
 }
 
 
+private let outterGradient = LinearGradient([.white(0.45), .white(0.95)], to: .topLeading)
+
 private struct ToggleButton: View {
   var body: some View {
-    let outterGradient = LinearGradient([.white(0.45), .white(0.95)], to: .topLeading)
     GeometryReader { geo in
       let innerGradient = RadialGradient(
         [.white(0.9), .white(0.3)],
@@ -150,6 +175,71 @@ private struct ToggleButton: View {
     }
   }
 }
+
+
+private struct ToggleStateIcon: Shape {
+  
+  var animatableData: CGFloat
+  private let debug: Bool
+  
+  init(_ isOn: Bool, debug: Bool = false) {
+    animatableData = isOn ? 1 : 0
+    self.debug = debug
+  }
+    
+  func path(in rect: CGRect) -> Path {
+    var path = Path()
+    
+    let g = stateIconConfig.layout(in: rect)
+    
+    path.move(g.leading.to(g.center, animatableData))
+    path.curve(
+      g.top,
+      cp1: g[0, 1].to(g[2, 1], animatableData),
+      cp2: g[1, 0].to(g.top.yOffset(1), animatableData),
+      showControlPoints: debug
+    )
+    path.curve(
+      g.trailing.to(g.center, animatableData),
+      cp1: g[3, 0].to(g.top.yOffset(1), animatableData),
+      cp2: g[4, 1].to(g[2, 1], animatableData),
+      showControlPoints: debug
+    )
+    path.curve(
+      g.bottom,
+      cp1: g[4, 3].to(g[2, 3], animatableData),
+      cp2: g[3, 4].to(g.bottom.yOffset(-1), animatableData),
+      showControlPoints: debug
+    )
+    path.curve(
+      g.leading.to(g.center, animatableData),
+      cp1: g[1, 4].to(g.bottom.yOffset(-1), animatableData),
+      cp2: g[0, 3].to(g[2, 3], animatableData),
+      showControlPoints: debug
+    )
+
+    path.closeSubpath()
+    
+    return path
+  }
+  
+  @ViewBuilder
+  func styling(lineWidth: CGFloat) -> some View {
+    if debug {
+      debugStyling()
+    } else {
+      stroke(style: .init(lineWidth: lineWidth, lineJoin: .round))
+    }
+  }
+
+}
+
+private extension Shape {
+  func debugStyling() -> some View {
+    strokeColor(.black, lineWidth: 2)
+  }
+}
+
 
 // MARK: - Preview stuffs
 struct SquishyToggle_Harness: View {
