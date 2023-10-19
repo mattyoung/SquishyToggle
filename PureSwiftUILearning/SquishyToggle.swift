@@ -15,18 +15,32 @@ import PureSwiftUI
 private let frameLayoutConfig = LayoutGuideConfig.grid(columns: [0.25, 0.4, 0.6, 0.75], rows: 2)
 
 struct SquishyToggle: View {
+  @State private var isOn = true
+  
   var body: some View {
     let debug = false
     
     GeometryReader { geo in
       let size = calculateSize(from: geo)
+      
       ZStack {
-        ToggleFrame(debug: debug)
+        ToggleFrame(isOn, debug: debug)
           .styling(color: .green)
           .layoutGuide(frameLayoutConfig, color: .green, lineWidth: 2)
+          .animation(.linear(duration: 1), value: isOn)
+        
+        ToggleButton()
+          .frame(size.heightScaled(0.9))
+          .xOffset(isOn ? size.halfHeight : -size.halfHeight)
+          .animation(.easeInOut(duration: 1), value: isOn)
       }
+      
       .frame(size)
       .borderIf(debug, .gray.opacity(0.2))
+      .contentShape(.capsule)
+      .onTapGesture {
+        isOn.toggle()
+      }
       .greedyFrame()
     }
     .showLayoutGuides(debug)
@@ -46,17 +60,27 @@ struct SquishyToggle: View {
 
 private struct ToggleFrame: Shape {
   
+  var animatableData: CGFloat
   private let debug: Bool
   
-  init(debug: Bool = false) {
+  init(_ isOn: Bool, debug: Bool = false) {
+    animatableData = isOn ? 1 : 0
     self.debug = debug
   }
-  
+    
   func path(in rect: CGRect) -> Path {
     var path = Path()
+    let maxCurveYOffset = rect.heightScaled(0.18)
+    
+    let offsetLayoutGuide = LayoutGuide.polar(.rect(.square(maxCurveYOffset)), rings: 1, segments: 1)
+      .rotated(360.degrees, factor: animatableData)
+    
+//    path.circle(offsetLayoutGuide.center, diameter: maxCurveYOffset)
+//    path.circle(offsetLayoutGuide.bottom, radius: 4)
+    
+    let curveYOffset = offsetLayoutGuide.bottom.y
     
     let g = frameLayoutConfig.layout(in: rect)
-    let curveYOffset = rect.heightScaled(0.18)
     
     let arcRadius = rect.halfHeight
     
@@ -104,8 +128,30 @@ private struct ToggleFrame: Shape {
 }
 
 
+private struct ToggleButton: View {
+  var body: some View {
+    let outterGradient = LinearGradient([.white(0.45), .white(0.95)], to: .topLeading)
+    GeometryReader { geo in
+      let innerGradient = RadialGradient(
+        [.white(0.9), .white(0.3)],
+        center: .bottomTrailing,
+        from: geo.widthScaled(0.2),
+        to: geo.widthScaled(1.5)
+      )
+      ZStack {
+        Circle()
+          .fill(outterGradient)
+        Circle()
+          .inset(geo.widthScaled(0.1))
+          .fill(innerGradient)
+      }
+      .drawingGroup()
+//      .shadow(5)
+    }
+  }
+}
 
-
+// MARK: - Preview stuffs
 struct SquishyToggle_Harness: View {
   var body: some View {
     SquishyToggle()
@@ -114,5 +160,5 @@ struct SquishyToggle_Harness: View {
 }
 
 #Preview {
-    SquishyToggle()
+    SquishyToggle_Harness()
 }
