@@ -14,6 +14,9 @@
 		480C50362ADFA28D0041FBC2 /* PureSwiftUILearningTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 480C50352ADFA28D0041FBC2 /* PureSwiftUILearningTests.swift */; };
 		480C50402ADFA28E0041FBC2 /* PureSwiftUILearningUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 480C503F2ADFA28E0041FBC2 /* PureSwiftUILearningUITests.swift */; };
 		480C50422ADFA28E0041FBC2 /* PureSwiftUILearningUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 480C50412ADFA28E0041FBC2 /* PureSwiftUILearningUITestsLaunchTests.swift */; };
+		480C50502ADFA2E80041FBC2 /* PureSwiftUI in Frameworks */ = {isa = PBXBuildFile; productRef = 480C504F2ADFA2E80041FBC2 /* PureSwiftUI */; };
+		480C50522AE02E360041FBC2 /* HeartShape.swift in Sources */ = {isa = PBXBuildFile; fileRef = 480C50512AE02E360041FBC2 /* HeartShape.swift */; };
+		480C50622AE18B4C0041FBC2 /* SquishyToggle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 480C50612AE18B4C0041FBC2 /* SquishyToggle.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -44,6 +47,8 @@
 		480C503B2ADFA28E0041FBC2 /* PureSwiftUILearningUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PureSwiftUILearningUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		480C503F2ADFA28E0041FBC2 /* PureSwiftUILearningUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PureSwiftUILearningUITests.swift; sourceTree = "<group>"; };
 		480C50412ADFA28E0041FBC2 /* PureSwiftUILearningUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PureSwiftUILearningUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		480C50512AE02E360041FBC2 /* HeartShape.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeartShape.swift; sourceTree = "<group>"; };
+		480C50612AE18B4C0041FBC2 /* SquishyToggle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SquishyToggle.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -51,6 +56,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				480C50502ADFA2E80041FBC2 /* PureSwiftUI in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -96,6 +102,8 @@
 			children = (
 				480C50242ADFA28C0041FBC2 /* PureSwiftUILearningApp.swift */,
 				480C50262ADFA28C0041FBC2 /* ContentView.swift */,
+				480C50512AE02E360041FBC2 /* HeartShape.swift */,
+				480C50612AE18B4C0041FBC2 /* SquishyToggle.swift */,
 				480C50282ADFA28D0041FBC2 /* Assets.xcassets */,
 				480C502A2ADFA28D0041FBC2 /* Preview Content */,
 			);
@@ -143,6 +151,9 @@
 			dependencies = (
 			);
 			name = PureSwiftUILearning;
+			packageProductDependencies = (
+				480C504F2ADFA2E80041FBC2 /* PureSwiftUI */,
+			);
 			productName = PureSwiftUILearning;
 			productReference = 480C50212ADFA28C0041FBC2 /* PureSwiftUILearning.app */;
 			productType = "com.apple.product-type.application";
@@ -215,6 +226,9 @@
 				Base,
 			);
 			mainGroup = 480C50182ADFA28C0041FBC2;
+			packageReferences = (
+				480C504E2ADFA2E80041FBC2 /* XCRemoteSwiftPackageReference "pure-swift-ui" */,
+			);
 			productRefGroup = 480C50222ADFA28C0041FBC2 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -257,7 +271,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				480C50522AE02E360041FBC2 /* HeartShape.swift in Sources */,
 				480C50272ADFA28C0041FBC2 /* ContentView.swift in Sources */,
+				480C50622AE18B4C0041FBC2 /* SquishyToggle.swift in Sources */,
 				480C50252ADFA28C0041FBC2 /* PureSwiftUILearningApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -588,6 +604,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		480C504E2ADFA2E80041FBC2 /* XCRemoteSwiftPackageReference "pure-swift-ui" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/CodeSlicing/pure-swift-ui.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 3.1.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		480C504F2ADFA2E80041FBC2 /* PureSwiftUI */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 480C504E2ADFA2E80041FBC2 /* XCRemoteSwiftPackageReference "pure-swift-ui" */;
+			productName = PureSwiftUI;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 480C50192ADFA28C0041FBC2 /* Project object */;
 }
