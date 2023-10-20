@@ -17,6 +17,7 @@
 		480C50502ADFA2E80041FBC2 /* PureSwiftUI in Frameworks */ = {isa = PBXBuildFile; productRef = 480C504F2ADFA2E80041FBC2 /* PureSwiftUI */; };
 		480C50522AE02E360041FBC2 /* HeartShape.swift in Sources */ = {isa = PBXBuildFile; fileRef = 480C50512AE02E360041FBC2 /* HeartShape.swift */; };
 		480C50622AE18B4C0041FBC2 /* SquishyToggle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 480C50612AE18B4C0041FBC2 /* SquishyToggle.swift */; };
+		480C509A2AE22DDB0041FBC2 /* InnerShadowReduxDemo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 480C50992AE22DDB0041FBC2 /* InnerShadowReduxDemo.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -49,6 +50,7 @@
 		480C50412ADFA28E0041FBC2 /* PureSwiftUILearningUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PureSwiftUILearningUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		480C50512AE02E360041FBC2 /* HeartShape.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeartShape.swift; sourceTree = "<group>"; };
 		480C50612AE18B4C0041FBC2 /* SquishyToggle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SquishyToggle.swift; sourceTree = "<group>"; };
+		480C50992AE22DDB0041FBC2 /* InnerShadowReduxDemo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InnerShadowReduxDemo.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -104,6 +106,7 @@
 				480C50262ADFA28C0041FBC2 /* ContentView.swift */,
 				480C50512AE02E360041FBC2 /* HeartShape.swift */,
 				480C50612AE18B4C0041FBC2 /* SquishyToggle.swift */,
+				480C50992AE22DDB0041FBC2 /* InnerShadowReduxDemo.swift */,
 				480C50282ADFA28D0041FBC2 /* Assets.xcassets */,
 				480C502A2ADFA28D0041FBC2 /* Preview Content */,
 			);
@@ -274,6 +277,7 @@
 				480C50522AE02E360041FBC2 /* HeartShape.swift in Sources */,
 				480C50272ADFA28C0041FBC2 /* ContentView.swift in Sources */,
 				480C50622AE18B4C0041FBC2 /* SquishyToggle.swift in Sources */,
+				480C509A2AE22DDB0041FBC2 /* InnerShadowReduxDemo.swift in Sources */,
 				480C50252ADFA28C0041FBC2 /* PureSwiftUILearningApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
