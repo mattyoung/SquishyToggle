@@ -16,6 +16,7 @@ private let frameLayoutConfig = LayoutGuideConfig.grid(columns: [0.25, 0.4, 0.6,
 
 private let buttonDiameterRatio = 0.9
 private let duration = 1.0
+private let rotationIfOff = -(2 / buttonDiameterRatio).radians
 
 private let stateIconConfig: LayoutGuideConfig = {
   let controlPointOffsetRatio: CGFloat = 0.552
@@ -39,19 +40,37 @@ struct SquishyToggle: View {
     
     GeometryReader { geo in
       let size = calculateSize(from: geo)
+      let shadowRadius = size.widthScaled(0.015)
+      let shadowOffset = CGPoint(size.widthScaled(0.01))
+      let toggleColor = isOn ? Color.green : .red
+      let textSize = size.widthScaled(0.15)
       
       ZStack {
         ToggleFrame(isOn, debug: debug)
-          .styling(color: .green)
+          .styling(background: toggleColor, shadowRadius: shadowRadius, shadowOffset: shadowOffset)
           .layoutGuide(frameLayoutConfig, color: .green, lineWidth: 2)
           .animation(.linear(duration: duration), value: isOn)
         
         Group {
+          CustomText("ON", textSize, .white(0.4), .medium)
+            .opacityIfNot(isOn, 0)
+            .xOffset(-size.halfHeight)
+            .scaleIfNot(isOn, 0)
+          CustomText("OFF", textSize, .white(0.4), .medium)
+            .opacityIf(isOn, 0)
+            .xOffset(size.halfHeight)
+            .scaleIf(isOn, 0)
+        }
+        .blendMode(.multiply)
+        .animation(.easeInOut(duration: duration), value: isOn)
+
+        Group {
           ToggleButton()
             .frame(size.heightScaled(buttonDiameterRatio))
+            .shadowColor(.white(0.1), shadowRadius, offset: shadowOffset)
           
           ToggleStateIcon(isOn, debug: debug)
-            .styling(lineWidth: size.widthScaled(0.04))
+            .styling(lineWidth: size.widthScaled(0.04), background: toggleColor, shadowRadius: shadowRadius, shadowOffset: shadowOffset)
             .frame(size.halfHeight)
             .layoutGuide(stateIconConfig, color: .red, lineWidth: 1, opacity: 1)
         }
@@ -140,12 +159,12 @@ private struct ToggleFrame: Shape {
     return path
   }
   
-  @ViewBuilder
-  func styling(color: Color) -> some View {
+  @ViewBuilder @warn_unqualified_access
+  func styling(background: Color, shadowRadius: CGFloat, shadowOffset: CGPoint) -> some View {
     if debug {
-      debugStyling()
+      self.debugStyling()
     } else {
-      fill(color)
+      self.innerShadow(background, radius: shadowRadius, offset: shadowOffset)
     }
   }
 
@@ -191,6 +210,7 @@ private struct ToggleStateIcon: Shape {
     var path = Path()
     
     let g = stateIconConfig.layout(in: rect)
+      .rotated(rotationIfOff, factor: 1 - animatableData)
     
     path.move(g.leading.to(g.center, animatableData))
     path.curve(
@@ -223,28 +243,51 @@ private struct ToggleStateIcon: Shape {
     return path
   }
   
-  @ViewBuilder
-  func styling(lineWidth: CGFloat) -> some View {
+  @ViewBuilder @warn_unqualified_access
+  func styling(lineWidth: CGFloat, background: Color, shadowRadius: CGFloat, shadowOffset: CGPoint) -> some View {
     if debug {
-      debugStyling()
+      self.debugStyling()
     } else {
-      stroke(style: .init(lineWidth: lineWidth, lineJoin: .round))
+      self.stroke(style: .init(lineWidth: lineWidth, lineJoin: .round))
+        .innerShadow(background.scale(1.5), radius: shadowRadius, offset: shadowOffset)
     }
   }
 
 }
 
 private extension Shape {
+  @warn_unqualified_access
   func debugStyling() -> some View {
     strokeColor(.black, lineWidth: 2)
   }
+
+  @warn_unqualified_access
+  func innerShadow<V: View>(_ background: V, radius: CGFloat = 5, opacity: Double = 0.7, offset: CGPoint = .zero) -> some View {
+    self.fill(.clear).innerShadow(background, self, radius: radius, opacity: opacity, offset: offset)
+  }
 }
 
+private extension View {
+  @warn_unqualified_access
+  func innerShadow<V: View, S: Shape>(_ background: V, _ shape: S, radius: CGFloat = 5, opacity: Double = 0.7, offset: CGPoint = .zero) -> some View {
+    self
+      .background(background)
+      .blendMode(.multiply)
+      .background(
+        ZStack {
+          shape.fill(Color(white: 1 - opacity))
+          shape.fill(Color.white).blur(radius).offset(offset)
+        }
+      )
+      .mask(self.overlay(shape))
+  }
+}
 
 // MARK: - Preview stuffs
 struct SquishyToggle_Harness: View {
   var body: some View {
     SquishyToggle()
+      .padding()
       .frame(400)
   }
 }
