@@ -305,9 +305,14 @@ private extension View {
 // MARK: - Preview stuffs
 struct SquishyToggle_Harness: View {
   var body: some View {
-    SquishyToggle()
-      .padding()
-      .frame(200)
+    VStack {
+      SquishyToggle()
+        .padding()
+        .height(200)
+      
+      ToggleFrame(true, debug: true)
+        .height(200)
+    }
   }
 }
 

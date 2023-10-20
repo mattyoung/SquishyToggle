@@ -114,7 +114,7 @@ struct InnerShadowsReduxDemo: View {
           .innerShadow(5, opacity: 0.8, x: 2, y: 2)
       }
     }
-    .width(500)
+    .height(800)
   }
 }
 
@@ -137,6 +137,7 @@ private struct LayeredView: View {
       }
     }
     .cornerRadius(roundedRectangleCornerRadius)
+    .overlay(Text("LayeredView()"))
   }
 }
 

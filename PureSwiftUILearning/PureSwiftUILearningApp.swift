@@ -9,9 +9,9 @@ import SwiftUI
 
 @main
 struct PureSwiftUILearningApp: App {
-    var body: some Scene {
-        WindowGroup {
-            SquishyToggle()
-        }
+  var body: some Scene {
+    WindowGroup {
+      SquishyToggle_Harness()
     }
+  }
 }
