@@ -35,6 +35,8 @@ private let stateIconConfig: LayoutGuideConfig = {
 struct SquishyToggle: View {
   @State private var isOn = true
   
+  @Namespace private var brandingSwap
+  
   var body: some View {
     let debug = false
     
@@ -52,11 +54,27 @@ struct SquishyToggle: View {
           .animation(.linear(duration: duration), value: isOn)
         
         Group {
-          CustomText("ON", textSize, .white(0.4), .medium)
+          CustomText(String(localized: "ON"), textSize, .white(0.4), .medium)
+            .juxtapose(alignment: .topTrailing, spacing: .init(-size.halfHeight / 3, -5)) {
+              if isOn {
+                Text("✏️Pencil")
+                  .lineLimit(1)
+                  .fixedSize()
+                  .matchedGeometryEffect(id: "branding", in: brandingSwap)
+              }
+            }
             .opacityIfNot(isOn, 0)
             .xOffset(-size.halfHeight)
             .scaleIfNot(isOn, 0)
-          CustomText("OFF", textSize, .white(0.4), .medium)
+          CustomText(String(localized: "OFF"), textSize, .white(0.4), .medium)
+            .juxtapose(alignment: .topLeading, spacing: .init(-size.halfHeight / 3, -5)) {
+              if !isOn {
+                Text("✏️Pencil")
+                  .lineLimit(1)
+                  .fixedSize()
+                  .matchedGeometryEffect(id: "branding", in: brandingSwap)
+              }
+            }
             .opacityIf(isOn, 0)
             .xOffset(size.halfHeight)
             .scaleIf(isOn, 0)
@@ -267,6 +285,7 @@ private extension Shape {
   }
 }
 
+// .innerShadow(_ shadowRadius: Double, opacity: Double = 0.5, x: Double = 0, y: Double = 0) -> some View
 private extension View {
   @warn_unqualified_access
   func innerShadow<V: View, S: Shape>(_ background: V, _ shape: S, radius: CGFloat = 5, opacity: Double = 0.7, offset: CGPoint = .zero) -> some View {
@@ -288,7 +307,7 @@ struct SquishyToggle_Harness: View {
   var body: some View {
     SquishyToggle()
       .padding()
-      .frame(400)
+      .frame(200)
   }
 }
 

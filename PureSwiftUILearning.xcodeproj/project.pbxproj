@@ -18,6 +18,8 @@
 		480C50522AE02E360041FBC2 /* HeartShape.swift in Sources */ = {isa = PBXBuildFile; fileRef = 480C50512AE02E360041FBC2 /* HeartShape.swift */; };
 		480C50622AE18B4C0041FBC2 /* SquishyToggle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 480C50612AE18B4C0041FBC2 /* SquishyToggle.swift */; };
 		480C509A2AE22DDB0041FBC2 /* InnerShadowReduxDemo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 480C50992AE22DDB0041FBC2 /* InnerShadowReduxDemo.swift */; };
+		4898ACC72AE2DC0E00F66F90 /* Localizable.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = 4898ACC62AE2DC0E00F66F90 /* Localizable.xcstrings */; };
+		4898ACC92AE2E6B700F66F90 /* JuxtaposedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4898ACC82AE2E6B700F66F90 /* JuxtaposedView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -51,6 +53,8 @@
 		480C50512AE02E360041FBC2 /* HeartShape.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeartShape.swift; sourceTree = "<group>"; };
 		480C50612AE18B4C0041FBC2 /* SquishyToggle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SquishyToggle.swift; sourceTree = "<group>"; };
 		480C50992AE22DDB0041FBC2 /* InnerShadowReduxDemo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InnerShadowReduxDemo.swift; sourceTree = "<group>"; };
+		4898ACC62AE2DC0E00F66F90 /* Localizable.xcstrings */ = {isa = PBXFileReference; lastKnownFileType = text.json.xcstrings; path = Localizable.xcstrings; sourceTree = "<group>"; };
+		4898ACC82AE2E6B700F66F90 /* JuxtaposedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JuxtaposedView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -107,6 +111,8 @@
 				480C50512AE02E360041FBC2 /* HeartShape.swift */,
 				480C50612AE18B4C0041FBC2 /* SquishyToggle.swift */,
 				480C50992AE22DDB0041FBC2 /* InnerShadowReduxDemo.swift */,
+				4898ACC82AE2E6B700F66F90 /* JuxtaposedView.swift */,
+				4898ACC62AE2DC0E00F66F90 /* Localizable.xcstrings */,
 				480C50282ADFA28D0041FBC2 /* Assets.xcassets */,
 				480C502A2ADFA28D0041FBC2 /* Preview Content */,
 			);
@@ -227,6 +233,8 @@
 			knownRegions = (
 				en,
 				Base,
+				"zh-Hant",
+				"zh-Hans",
 			);
 			mainGroup = 480C50182ADFA28C0041FBC2;
 			packageReferences = (
@@ -250,6 +258,7 @@
 			files = (
 				480C502C2ADFA28D0041FBC2 /* Preview Assets.xcassets in Resources */,
 				480C50292ADFA28D0041FBC2 /* Assets.xcassets in Resources */,
+				4898ACC72AE2DC0E00F66F90 /* Localizable.xcstrings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -279,6 +288,7 @@
 				480C50622AE18B4C0041FBC2 /* SquishyToggle.swift in Sources */,
 				480C509A2AE22DDB0041FBC2 /* InnerShadowReduxDemo.swift in Sources */,
 				480C50252ADFA28C0041FBC2 /* PureSwiftUILearningApp.swift in Sources */,
+				4898ACC92AE2E6B700F66F90 /* JuxtaposedView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

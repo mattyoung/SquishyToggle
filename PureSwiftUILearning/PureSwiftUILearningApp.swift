@@ -11,7 +11,7 @@ import SwiftUI
 struct PureSwiftUILearningApp: App {
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            SquishyToggle()
         }
     }
 }

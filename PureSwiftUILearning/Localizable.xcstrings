@@ -1,5 +1,108 @@
 {
   "sourceLanguage" : "en",
-  "strings" : {},
+  "strings" : {
+    "✏️Pencil" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "✏️鉛筆"
+          }
+        },
+        "zh-Hant" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "✏️铅笔"
+          }
+        }
+      }
+    },
+    "Dealer" : {
+
+    },
+    "Hello, world!" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "世界，你好👋！"
+          }
+        },
+        "zh-Hant" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "你好世界！"
+          }
+        }
+      }
+    },
+    "Here is a TextField" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "這是一個文字字段\\"
+          }
+        },
+        "zh-Hant" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "这是一个文本字段"
+          }
+        }
+      }
+    },
+    "INNER\nSHADOWS" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "內的陰影"
+          }
+        },
+        "zh-Hant" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "内的阴影"
+          }
+        }
+      }
+    },
+    "OFF" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "關"
+          }
+        },
+        "zh-Hant" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "关"
+          }
+        }
+      }
+    },
+    "ON" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "開"
+          }
+        },
+        "zh-Hant" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "开"
+          }
+        }
+      }
+    },
+    "Player 1" : {
+
+    }
+  },
   "version" : "1.0"
 }
